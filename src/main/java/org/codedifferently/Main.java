@@ -22,12 +22,14 @@ String couponCode = input.next();
 
 
         int idNumber = RandomGenerator.generateVisitId();
-
+double stateTax = RandomGenerator.generateRandomTax();
+double itemPrice = RandomGenerator.generateItemPrices();
+double discountAmount = RandomGenerator.generateDiscountTotal();
 
 
         System.out.println(idNumber);
 
-
+        System.out.println(discountAmount);
 
 
 
