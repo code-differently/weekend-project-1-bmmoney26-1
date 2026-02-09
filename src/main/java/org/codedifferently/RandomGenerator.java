@@ -12,7 +12,7 @@ public class RandomGenerator {
 
 
 
-public static double generateItemPrices(){
+public static double generateItemPrice(){
 
 
 
@@ -31,13 +31,13 @@ public static double generateItemPrices(){
 
 
 
-     return randomGen.nextDouble(0.0, 0.011);
+     return randomGen.nextDouble(5.0, 7.00);
 
   }
 
 public static double generateDiscountTotal(){
 
-      return  randomGen.nextDouble(6.00, 15.00);
+      return  randomGen.nextDouble(1.00, 6.00);
 
 
 
