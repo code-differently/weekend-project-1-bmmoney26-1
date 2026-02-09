@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 
 public class Main {
-Scanner input = new Scanner(System.in);
 
 
 
@@ -13,12 +12,13 @@ Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("What is your name? ");
-String customerName = input.next();
-        System.out.println("What is your budget" + "?");
+        System.out.println("What is your name?: ");
+String customerName = input.nextLine();
+        System.out.println("What is your budget?: ");
 double budget = input.nextDouble();
+input.nextLine();
         System.out.println("Enter coupon code: ");
-String couponCode = input.next();
+String couponCode = input.nextLine();
 
         int idNumber = RandomGenerator.generateVisitId();
         double stateTax = RandomGenerator.generateRandomTax();
@@ -31,9 +31,30 @@ double thirdItem= RandomGenerator.generateItemPrice();
 double subtotal = CalculateTax.generateSubtotal(firstItem, secondItem, thirdItem);
 double taxTotal = CalculateTax.calculateTax(subtotal, stateTax);
 double total = CalculateTax.totalPreDiscount(subtotal, taxTotal);
-double discountedTotal = CalculateTax.discountAddition(total, discountAmount);
-double roundedTotal = CalculateTax.roundingUp(discountedTotal);
+discountAmount = Receipt.applyExtraCoupon(discountAmount,couponCode);
+        double discountedTotal = CalculateTax.discountAddition(total, discountAmount);
+        double roundedTotal = CalculateTax.roundingUp(discountedTotal);
 
 
+       Receipt.printReceipt(customerName,
+               couponCode,
+               idNumber,
+               firstItem,
+               secondItem,
+               thirdItem,
+               subtotal,
+               taxTotal,
+               discountAmount,
+               roundedTotal);
+
+       double remaining = budget - roundedTotal;
+       if (remaining >= 0){
+           System.out.printf("You have $%.2f left in your budget.%n" , remaining);
+       }
+else {
+           System.out.printf("You are $%.2f over your budget!%n", Math.abs(remaining));
+       }
+
+input.close();
     }
 }
